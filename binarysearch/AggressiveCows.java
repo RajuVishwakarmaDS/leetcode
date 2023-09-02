@@ -6,25 +6,32 @@ import java.util.Arrays;
 public class AggressiveCows {
     public static boolean isPossibleSolution(int[] stalls, int n, int k, int mid) {
         int cowsCount = 1;
+        int distance = 0;
         int lastCowPosition = stalls[0];
 
         for (int i = 0; i < n; i++) {
-            if (stalls[i] - lastCowPosition >= mid) {
-                // place cow
+            if (distance <= mid) {
+                distance = distance + stalls[i] - lastCowPosition;
+            } else {
                 cowsCount++;
-                if (cowsCount == k) {
-                    return true;
+                if (cowsCount > k) {
+                    return false;
+                } else {
+                    lastCowPosition = stalls[i];
                 }
-                lastCowPosition = stalls[i];
             }
         }
-        return false;
+        if (cowsCount == k) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public static int solve(int n, int k, int[] stalls) {
-        int start = 1;
         Arrays.sort(stalls);
-        int end = stalls[n - 1];
+        int start = 1;
+        int end = Arrays.stream(stalls).sum();
         int mid = (start + end) / 2;
         int ans = -1;
 
@@ -41,9 +48,9 @@ public class AggressiveCows {
     }
 
     public static void main(String[] args) {
-        int[] arr = new int[]{1, 2, 3, 4, 6};
+        int[] arr = new int[]{10, 1, 2, 7, 5};
         int n = arr.length;
-        int k = 2;
+        int k = 3;
         System.out.println(solve(n, k, arr));
     }
 }

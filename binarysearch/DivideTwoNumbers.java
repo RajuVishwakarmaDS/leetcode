@@ -1,5 +1,7 @@
 package leet.code.binarysearch;
 
+import java.util.Arrays;
+
 public class DivideTwoNumbers {
     public static int divide(long divid, long div) {
         long dividend = divid;
