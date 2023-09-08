@@ -1,10 +1,26 @@
 package leet.code.string;
 
+import java.util.HashSet;
+
 public class LongestSubStringWithoutRepeatingChar {
+    public static boolean isNonRepeating(String str) {
+        StringBuilder sb = new StringBuilder(str);
+        HashSet<Character> set = new HashSet<>();
+        for (int i = 0; i < sb.length(); i++) {
+            char ch = sb.charAt(i);
+            if (set.contains(ch)){
+                return false;
+            }else {
+                set.add(ch);
+            }
+        }
+        return true;
+    }
+
     public static void expandAroundIndex(String s, int i, int j) {
         while (i >= 0 && j < s.length()) {
             String str = s.substring(i, j + 1);
-            if (j - i + 1 > max && str.length() == str.replaceAll("(.|\\w+)((?=.+\\1)|\\1)", "").length()) {
+            if (j - i + 1 > max && isNonRepeating(str)) {
                 max = j - i + 1;
                 ans = str;
             }
