@@ -3,30 +3,42 @@ package leet.code.array;
 import java.util.Arrays;
 
 public class RemoveElement {
-    public static int[] removeDuplicates(int[] nums, int key) {
-        int start = 0;
-        int end = nums.length - 2;
-        int cnt = 0;
-
-        while (start <= end) {
-            if (nums[start] == key) {
-                start++;
-            } else {
-                nums[cnt] = nums[start];
-                cnt++;
-                start++;
+    public static void inplaceReplace(int []arr, int i) {
+        int start = i;
+        int n = arr.length;
+        while (start < n - 1) {
+            if (arr[++start] != arr[i]) {
+                int temp = arr[start];
+                arr[start] = arr[i];
+                arr[i] = temp;
+                break;
             }
         }
-        nums[cnt] = nums[end];
-        for (int i = cnt + 1; i < end + 2; i++) {
-            nums[i] = 0;
+    }
+
+    public static int removeDuplicates(int[] nums, int key) {
+        int n = nums.length;
+        int cnt = 0;
+        for (int i = 0; i < n; i++) {
+            if (nums[i] == key) {
+                inplaceReplace(nums, i);
+            }
         }
-        return nums;
+
+        for (int i = 0; i < n; i++) {
+            if (nums[i] != key) {
+                cnt++;
+            }
+        }
+
+        return cnt;
     }
 
     public static void main(String[] args) {
-        int[] arr = new int[]{2};
-        int key = 3;
-        Arrays.stream(removeDuplicates(arr, key)).forEach(x -> System.out.print(x + " "));
+        int[] arr = new int[]{0, 1, 2, 2, 3, 0, 4, 2};
+        // [0,1,4,0,3,_,_,_]
+        int key = 2;
+        System.out.println(removeDuplicates(arr, key));
+        Arrays.stream(arr).forEach(x -> System.out.print(x + " "));
     }
 }

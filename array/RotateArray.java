@@ -2,23 +2,31 @@ package leet.code.array;
 
 import java.util.Arrays;
 
+// important
+
 public class RotateArray {
     public static void rotate(int[] nums, int k) {
-        int rotation_cnt = 0;
         int n = nums.length;
-
-        while (rotation_cnt < 1) {
-            int temp = nums[n - 1];
+        int[] temp = new int[n];
+        if (n > 1) {
             int i = 0;
-            while (i < n - 1) {
-                nums[i] = nums[i + 1];
+            while (i + k < n) {
+                temp[i + k] = nums[i];
                 i++;
             }
-            nums[0] = temp;
-            Arrays.stream(nums).forEach(x -> System.out.print(x + " "));
-            System.out.println();
-            rotation_cnt++;
+
+            while (i + k >= n && i < n) {
+                int idx = (i + k) % n;
+                temp[idx] = nums[i++];
+            }
+
+            for (i = 0; i < n; i++) {
+                nums[i] = temp[i];
+            }
         }
+
+        Arrays.stream(nums).forEach(x -> System.out.print(x + " "));
+        System.out.println();
     }
 
     public static void main(String[] args) {

@@ -42,7 +42,7 @@ public class ReorganizeString {
         for (Map.Entry<Character, Integer> iter : map.entrySet()) {
             int freq = iter.getValue();
             char ch = iter.getKey();
-            ans = getReplaced(ans, ch, freq, n);
+            getReplaced(ans, ch, freq, n);
         }
         return "";
     }
