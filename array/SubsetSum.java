@@ -1,19 +1,19 @@
-package leet.code.recursion;
+package leet.code.array;
 
-public class CoinChange {
-    public static int coinChange(int[] coins, int amount) {
+public class SubsetSum {
+    public static int findElements(int num, int[] nums) {
         // base case
-        if (amount == 0) {
+        if (num == 0) {
             return 0;
         }
 
-        if (amount < 0) {
+        if (num < 0) {
             return Integer.MIN_VALUE;
         }
 
         int min = Integer.MIN_VALUE;
-        for (int i = 0; i < coins.length; i++) {
-            int ans = coinChange(coins, amount - coins[i]);
+        for (int j : nums) {
+            int ans = findElements(num - j, nums);
             if (ans != Integer.MIN_VALUE) {
                 min = Math.max(Integer.MIN_VALUE, ans + 1);
             }
@@ -24,7 +24,8 @@ public class CoinChange {
 
     public static void main(String[] args) {
         int[] arr = new int[]{1,2,3,4,5};
-        int target = 32;
-        System.out.println(coinChange(arr, target));
+        for (int num:arr) {
+            System.out.println(findElements(num, arr));
+        }
     }
 }

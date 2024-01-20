@@ -44,7 +44,7 @@ public class LongestSubStringWithoutRepeatingChar {
     static String ans = "";
 
     public static void main(String[] args) {
-        String s = "abcabcbb";
+        String s = "abcadeacbb";
         System.out.println(countSubstrings(s));
     }
 }

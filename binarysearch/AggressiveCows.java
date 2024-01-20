@@ -50,7 +50,7 @@ public class AggressiveCows {
     public static void main(String[] args) {
         int[] arr = new int[]{10, 1, 2, 7, 5};
         int n = arr.length;
-        int k = 3;
+        int k = 2;
         System.out.println(solve(n, k, arr));
     }
 }
