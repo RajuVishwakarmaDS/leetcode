@@ -1,19 +1,18 @@
 package leet.code.binarysearch;
 
 public class PeakElement {
-    public static int getMountainPeak(int[] nums) {
-        int size = nums.length;
+    public static int getMountainPeak(int[] arr) {
         int start = 0;
-        int end = size - 1;
-        int mid = (start + end) / 2;
+        int end = arr.length - 1;
+        int mid = end - (end - start) / 2;
 
         while (start < end) {
-            if (nums[mid] < nums[mid + 1]) {
-                start = mid + 1;
+            if (arr[mid] > arr[mid - 1]) {
+                start = mid;
             } else {
-                end = mid;
+                end = mid - 1;
             }
-            mid = (start + end) / 2;
+            mid = end - (end - start) / 2;
         }
         return start;
     }

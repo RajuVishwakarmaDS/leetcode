@@ -4,36 +4,31 @@ import java.util.Arrays;
 
 public class KoKoEatingBanana {
     public static int getSum(int[] arr, int mid) {
-        int inter_sum = 0;
-
-        for (int j : arr) {
-            inter_sum = inter_sum + (int) Math.ceil((double) j / mid);
-        }
-        return inter_sum;
+        return Arrays.stream(arr).reduce(0, (ans, x) -> (int) (ans + Math.ceil((double) x / mid)));
     }
 
     public static int minEatingSpeed(int[] piles, int h) {
-        int start = 1;
+        int start = 0;
         int end = Arrays.stream(piles).max().getAsInt();
+        int mid = end - (end - start) / 2;
 
-        int mid = (start + end) / 2;
-
-        while (start < end) {
-            int sum = getSum(piles, mid);
-            if (sum <= h) {
-                end = mid;
-            } else {
+        while (start <= end) {
+            int rate = getSum(piles, mid);
+            if (rate == h) {
+                return mid;
+            } else if (rate > h) {
                 start = mid + 1;
+            } else {
+                end = mid - 1;
             }
-
-            mid = (start + end) / 2;
+            mid = end - (end - start) / 2;
         }
         return start;
     }
 
     public static void main(String[] args) {
-        int[] arr = new int[]{805306368, 805306368, 805306368};
-        int h = 1000000000;
+        int[] arr = new int[]{30, 11, 23, 4, 20};
+        int h = 6;
         int k = minEatingSpeed(arr, h);
         System.out.println("Minimum K: " + k);
     }
