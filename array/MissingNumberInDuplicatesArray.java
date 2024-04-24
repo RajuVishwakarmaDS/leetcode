@@ -1,20 +1,24 @@
 package leet.code.array;
 
-public class DuplicateNumber {
+public class MissingNumberInDuplicatesArray {
     public static int findDuplicate(int[] nums) {
         int[] temp = new int[nums.length];
         for (int num : nums) {
-            if (temp[num] != num) {
+            if (num < nums.length) {
                 temp[num] = num;
-            } else {
-                return num;
             }
         }
-        return temp[0];
+
+        for (int i = 1; i < nums.length; i++) {
+            if (temp[i] == 0) {
+                return i;
+            }
+        }
+        return -1;
     }
 
     public static void main(String[] args) {
-        int[] arr = new int[]{3, 1, 3, 4, 2};
+        int[] arr = new int[]{4, 3, 6, 2, 1, 1};
         System.out.println(findDuplicate(arr));
     }
 }
